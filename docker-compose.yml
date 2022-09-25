@@ -1,0 +1,37 @@
+version: '3'
+services:
+  meli-morse-app:
+    container_name: meli-morse-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    networks:
+      - meli-morse
+
+  meli-morse-redis:
+    image: postgres:13.4-alpine3.14
+    container_name: admin_db_postgres_alameda
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - DATABASE_HOST=${DB_HOST}
+    ports:
+      - '5432:5432'
+    volumes:
+      - database_postgres_alameda:/var/lib/postgresql/data
+    networks:
+      - meli-morse
+
+volumes:
+  api:
+  database_postgres_alameda:
+
+networks:
+  meli-morse:
+    driver: bridge
