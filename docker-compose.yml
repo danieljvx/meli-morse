@@ -1,0 +1,18 @@
+version: '3'
+services:
+  meli-morse-app:
+    container_name: meli-morse-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: on-failure
+    volumes:
+      - api:/usr/src/app/
+    networks:
+      - meli-morse
+
+networks:
+  meli-morse:
+    driver: bridge
