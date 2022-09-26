@@ -6,6 +6,10 @@
 docker-compose up --build
 ```
 
+### `Run App:`
+```bash
+go run .
+```
 ### `meli-morse:`
 | Resource | Type | Path | Body |
 | ------ | ------ | ------ | ------ |
@@ -13,6 +17,10 @@ docker-compose up --build
 | translate2Human | POST | [http://localhost:8000/translate/2text](http://localhost:8000/translate/2text) | { "text": "string" } |
 | translate2Morse | POST | [http://localhost:8000/translate/2morse](http://localhost:8000/translate/2morse) | { "text": "string" } |
 
+### `Test App:`
+```bash
+go test -v ./... -cover
+```
 
 ## Daniel Villanueva
 
