@@ -14,6 +14,12 @@ RUN go mod download
 
 COPY . .
 
+RUN go get -u github.com/swaggo/swag/cmd/swag
+
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+
+RUN swag init -g main.go --output docs
+
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 EXPOSE 8000

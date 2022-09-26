@@ -16,6 +16,7 @@ func App() *fiber.App {
 			"message": "Api meli-morse by @danieljvx",
 		})
 	})
+	routes.SwaggerRoute(app)
 	routes.TranslateRoute(app)
 	return app
 }

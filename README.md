@@ -3,6 +3,7 @@
 ### `Production meli-morse:` [https://danieljvx-meli-morse.herokuapp.com](https://danieljvx-meli-morse.herokuapp.com)
 | Resource | Type | Path | Body |
 | ------ | ------ | ------ | ------ |
+| Swagger | GET | [https://danieljvx-meli-morse.herokuapp.com/swagger/index.html](https://danieljvx-meli-morse.herokuapp.com/swagger/index.html) | null |
 | decodeBits2Morse | POST | [https://danieljvx-meli-morse.herokuapp.com/translate/decodeBits](https://danieljvx-meli-morse.herokuapp.com/translate/decodeBits) | { "text": "string" } |
 | translate2Human | POST | [https://danieljvx-meli-morse.herokuapp.com/translate/2text](https://danieljvx-meli-morse.herokuapp.com/translate/2text) | { "text": "string" } |
 | translate2Morse | POST | [https://danieljvx-meli-morse.herokuapp.com/translate/2morse](https://danieljvx-meli-morse.herokuapp.com/translate/2morse) | { "text": "string" } |
@@ -20,6 +21,7 @@ go run .
 ### `meli-morse:`
 | Resource | Type | Path | Body |
 | ------ | ------ | ------ | ------ |
+| Swagger | GET | [http://localhost:8000/swagger/index.html](http://localhost:8000/swagger/index.html) | null |
 | decodeBits2Morse | POST | [http://localhost:8000/translate/decodeBits](http://localhost:8000/translate/decodeBits) | { "text": "string" } |
 | translate2Human | POST | [http://localhost:8000/translate/2text](http://localhost:8000/translate/2text) | { "text": "string" } |
 | translate2Morse | POST | [http://localhost:8000/translate/2morse](http://localhost:8000/translate/2morse) | { "text": "string" } |
