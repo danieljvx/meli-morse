@@ -32,8 +32,38 @@ func (t *translate) DecodeBits2Morse(r io.Reader) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	breaks := 0
+	dots := 0
+	lines := 0
 	binary := string(d)
-	return []byte(binary), nil
+	var translateMorse string
+	for i, b := range binary {
+		char := string(b)
+		if char == "0" {
+			breaks = 1 + breaks
+		}
+		if char == "1" {
+			dots = 1 + dots
+			lines = 1 + lines
+		}
+		if breaks >= 4 && breaks <= 7 && string(binary[i + 1]) == "1" {
+			translateMorse += " "
+			breaks = 0
+		}
+		if dots > 0 && dots <= 3 && string(binary[i + 1]) == "0" {
+			translateMorse += "."
+			dots = 0
+			lines = 0
+			breaks = 0
+		}
+		if lines > 3 && string(binary[i + 1]) == "0" {
+			translateMorse += "-"
+			dots = 0
+			lines = 0
+			breaks = 0
+		}
+	}
+	return []byte(translateMorse), nil
 }
 
 func (t *translate) Translate2Morse(r io.Reader) ([]byte, error) {
@@ -56,7 +86,7 @@ func (t *translate) Translate2Morse(r io.Reader) ([]byte, error) {
 			}
 		}
 		if numOfWords != (j + 1) {
-			translateWords += " " + "/" + " "
+			translateWords += "  "
 		}
 	}
 	return []byte(translateWords), nil
@@ -68,19 +98,13 @@ func (t *translate) Translate2Human(r io.Reader) ([]byte, error) {
 		return nil, err
 	}
 	data := string(d)
-
-	// strings.TrimSpace
 	splitDataWords := strings.Split(data, " ")
-	// numOfWords := len(splitDataWords)
 	var decodedValue string
 	for _, val := range splitDataWords {
-		if val == "/" {
+		if val == "" {
 			decodedValue += " "
 		}
 		decodedValue += morseToAlphaNum[val]
-		// if numOfWords == (i + 1) {
-		// 	decodedValue += " " + "/" + " "
-		// }
 	}
 
 	return []byte(decodedValue), nil
