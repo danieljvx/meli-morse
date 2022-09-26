@@ -16,6 +16,15 @@ import (
 
 var validate = validator.New()
 
+// DecodeBits func decode bits to morse.
+// @Description Decode bits to morse.
+// @Summary decode bits to morse.
+// @Tags DecodeBits
+// @Accept json
+// @Produce json
+// @Param text body string true "Text"
+// @Success 201 {object} responses.TranslateResponse
+// @Router /translate/decodeBits [post]
 func DecodeBits(c *fiber.Ctx) error {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var translate requests.TranslateRequest
@@ -39,6 +48,15 @@ func DecodeBits(c *fiber.Ctx) error {
 	return c.Status(http.StatusCreated).JSON(responses.TranslateResponse{Status: http.StatusCreated, Message: string(morseCode) })
 }
 
+// ToText func decode morse to text human.
+// @Description Decode morse to text human.
+// @Summary decode morse to text human.
+// @Tags ToText
+// @Accept json
+// @Produce json
+// @Param text body string true "Text"
+// @Success 201 {object} responses.TranslateResponse
+// @Router /translate/2text [post]
 func ToText(c *fiber.Ctx) error {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var translate requests.TranslateRequest
@@ -61,6 +79,15 @@ func ToText(c *fiber.Ctx) error {
 	return c.Status(http.StatusCreated).JSON(responses.TranslateResponse{Status: http.StatusCreated, Message: string(textCode) })
 }
 
+// ToMorse func decode text to morse.
+// @Description Decode text to morse.
+// @Summary decode text to morse.
+// @Tags ToMorse
+// @Accept json
+// @Produce json
+// @Param text body string true "Text"
+// @Success 201 {object} responses.TranslateResponse
+// @Router /translate/2morse [post]
 func ToMorse(c *fiber.Ctx) error {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var translate requests.TranslateRequest
